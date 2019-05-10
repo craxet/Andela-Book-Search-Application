@@ -1,6 +1,10 @@
 # AndelaBookSearchApp
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.0.4.
+This project was Built with [Angular CLI](https://github.com/angular/angular-cli) version 7.0.4.
+
+## To Install the Application
+1. Clone or Download this application into your angular workspace
+2. Run `npm install`  in the  root folder of the application to install all depenencies.
 
 ## Development server
 
