@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+    integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">Andela Book Search</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  </nav>
+
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6  ml-auto mr-auto pt-5 mt-4 ">
+        <form [formGroup]="bookSearchFormGroup" (ngSubmit)="onSubmit()">
+
+          <h4 class="text-primary">Search for a Book</h4>
+
+          <div class="form-group pt-4">
+            <mat-form-field class="full-input">
+              <input formControlName="isbnToSearch" matInput placeholder="Enter ISBN to search for a book" type="text"
+                value="" prefix="ISBN " mask="000-0-000-00000-0" [readonly]="searching">
+            </mat-form-field>
+
+            <small *ngIf="bookNotFound" class="form-text text-danger">
+              <i class="far fa-sad-cry"></i>
+              Sorry! Rats ate this book and we are still looking for a replacement.
+            </small>
+          </div>
+
+          <button class="btn btn-primary rounded-0 btn-block " type="submit"
+            [disabled]="searching || this.bookSearchFormGroup.invalid">
+
+            <span *ngIf="!searching"> <i class="fas fa-search"></i> Search</span>
+
+            <i *ngIf="searching">
+              <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+              Searching...
+            </i>
+          </button>
+
+          <small *ngIf="offline" class="form-text text-danger">
+            <i class="far fa-sad-cry"></i>
+            Sorry! You have no Internet Connection.
+          </small>
+
+        </form>
+
+      </div>
+    </div>
+  </div>
+
+  <section *ngIf="bulkbooks && bulkbooks.length > 0">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 ml-auto mr-auto pt-2 each-card  text-center mt-5">
+
+          <img class="book-img" [src]="bulkbooks[0].image" alt=" Book Name">
+
+          <h5> <strong> Title: </strong> {{bulkbooks[0].title}}</h5>
+          <h6> <strong> Author(s): </strong> {{bulkbooks[0].authors}}</h6>
+          <p> <strong> Description: </strong> {{bulkbooks[0].desc  | tenWords }} </p>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section *ngIf="bulkbooks && bulkbooks.length > 1" class="bulkbooks">
+    <div class="container">
+      <div class="row  ">
+
+        <div class="col-md-12 text-muted mt-4">
+          <h4> Book History </h4>
+        </div>
+
+        <div *ngFor="let bulkbook of bulkbooks | slice:1" class="col-md-3 mt-1 text-center each-card mb-1"
+          (click)="reShuffle(bulkbook)">
+          <img class="past-book-img" [src]="bulkbook.image" alt=" Book Name">
+          <!-- <h5>{{bulkbook.title}}</h5> -->
+          <h6> <strong> Title:</strong> {{bulkbook.title}}</h6>
+          <p> <strong> Author(s): </strong> {{bulkbook.authors}} </p>
+          <p><strong> Description: </strong> {{bulkbook.desc | tenWords }}</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container" *ngIf="bulkbooks && bulkbooks.length > 0">
+      <div class="row">
+        <div class="col-md-12 text-right">
+          <button (click)="clearLib()" class="btn btn-primary rounded-0 " type="button">
+            <i class="fas fa-trash-alt" aria-hidden="true"></i>
+            Clear Library...
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <Section>
+    <div class="container pt-5">
+      <div class="row">
+        <div class="footer">
+
+        </div>
+      </div>
+    </div>
+  </Section>
+</body>
+
+</html>

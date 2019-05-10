@@ -1,0 +1,35 @@
+.full-input{
+    width: 100%;
+}
+.book-img {
+  height: 300px;
+  width: auto;
+  clear: both;
+}
+
+.past-book-img {
+  height: 200px;
+  width: auto;
+  clear: both;
+}
+
+body {
+  background-image: url('../assets/img/bgr1.png');
+  background-repeat: repeat !important;
+}
+
+.bulkbooks {
+  background-image: url('../assets/img/bgr1.png');
+  background-repeat: repeat !important;
+
+}
+
+.each-card {
+  border-radius: 0;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.70);
+  transition: all .7s ease 0s;
+}
+
+.each-card:hover { 
+  box-shadow: 0 0  15px rgba(0, 0, 0, 1); 
+}
